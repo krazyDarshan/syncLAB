@@ -185,37 +185,6 @@ export const lessons: Record<Algorithm, Lesson> = {
       ],
     ],
   },
-  philosophers: {
-    title: 'Dining Philosophers',
-    short: 'Dining',
-    subtitle: 'Five thinkers. Five shared forks.',
-    tag: '07 / CIRCULAR WAIT',
-    description:
-      'Each philosopher needs both adjacent forks to eat. The naive schedule lets everyone hold the left fork before requesting the right, producing circular wait.',
-    analogy:
-      'Five people each hold one tool and wait for the next person’s tool before they can work.',
-    code: [
-      'become hungry; request first fork',
-      'acquire left (or lower-numbered) fork',
-      'acquire right (or higher); eat',
-      'release both forks; finish meal',
-      'detect cycle in wait-for graph',
-    ],
-    advantage:
-      'Global resource ordering removes circular wait: always acquire the lower-numbered fork first.',
-    limitation:
-      'Resource ordering prevents this deadlock, but does not by itself guarantee bounded waiting under every scheduler.',
-    viva: [
-      [
-        'Which condition does ordering break?',
-        'Circular wait: a strictly increasing acquisition order cannot form a cycle.',
-      ],
-      [
-        'Why not just acquire the left fork first?',
-        'All five can acquire their left fork and then wait forever for their right fork.',
-      ],
-    ],
-  },
   deadlock: {
     title: 'Deadlock Lab',
     short: 'Deadlock',

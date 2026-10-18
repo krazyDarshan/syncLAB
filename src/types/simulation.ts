@@ -1,5 +1,5 @@
 export type Algorithm =
-  'race' | 'mutex' | 'binary' | 'counting' | 'buffer' | 'readers' | 'philosophers' | 'deadlock';
+  'race' | 'mutex' | 'binary' | 'counting' | 'buffer' | 'readers' | 'deadlock';
 export type Status = 'READY' | 'RUNNING' | 'WAITING' | 'CRITICAL' | 'DEADLOCKED' | 'FINISHED';
 export interface Process {
   id: number;

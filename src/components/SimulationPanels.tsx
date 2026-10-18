@@ -58,7 +58,7 @@ function Metrics() {
                 s.waiting.filter((id) => s.processes[id].role === 'Writer').length,
               ],
             ]
-          : ['philosophers', 'deadlock'].includes(s.algorithm)
+          : s.algorithm === 'deadlock'
             ? [
                 ['Resources held', s.forks.filter((f) => f !== null).length],
                 ['Available', s.forks.filter((f) => f === null).length],
@@ -282,7 +282,7 @@ export function Configuration() {
         <span>Processes</span>
         <button
           aria-label="Remove process"
-          disabled={s.config.count <= 2 || ['philosophers', 'deadlock'].includes(s.algorithm)}
+          disabled={s.config.count <= 2 || s.algorithm === 'deadlock'}
           onClick={() => configure({ count: s.config.count - 1 })}
         >
           <Minus size={13} />
@@ -290,7 +290,7 @@ export function Configuration() {
         <b>{s.config.count}</b>
         <button
           aria-label="Add process"
-          disabled={s.config.count >= 8 || ['philosophers', 'deadlock'].includes(s.algorithm)}
+          disabled={s.config.count >= 8 || s.algorithm === 'deadlock'}
           onClick={() => configure({ count: s.config.count + 1 })}
         >
           <Plus size={13} />
@@ -359,7 +359,7 @@ export function Configuration() {
           <option value="reader">Reader preference</option>
         </select>
       )}
-      {['philosophers', 'deadlock'].includes(s.algorithm) && (
+      {s.algorithm === 'deadlock' && (
         <label className="switch-label">
           <input
             type="checkbox"

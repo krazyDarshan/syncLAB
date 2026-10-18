@@ -22,11 +22,9 @@ export const defaults: Config = {
 export function initial(algorithm: Algorithm, config: Partial<Config> = {}): Simulation {
   const c = { ...defaults, ...config };
   c.count =
-    algorithm === 'philosophers'
-      ? 5
-      : algorithm === 'deadlock'
-        ? 3
-        : Math.max(2, Math.min(8, c.count));
+  algorithm === 'deadlock'
+    ? 3
+    : Math.max(2, Math.min(8, c.count));
   c.capacity = Math.max(1, Math.min(6, c.capacity));
   const processes = Array.from({ length: c.count }, (_, id) => ({
     id,
@@ -59,7 +57,7 @@ export function initial(algorithm: Algorithm, config: Partial<Config> = {}): Sim
     buffer: [],
     produced: 0,
     consumed: 0,
-    forks: Array(algorithm === 'philosophers' ? 5 : 3).fill(null),
+    forks: Array(3).fill(null),
     deadlock: false,
     done: false,
     line: 0,
@@ -209,7 +207,7 @@ export function advance(input: Simulation): Simulation {
         if (p.phase === 2) s.owners.push(p.id);
         s.waiting = s.waiting.filter((id) => id !== p.id);
         log(
-          `acquire ${s.algorithm === 'philosophers' ? 'fork' : 'resource'} R${fork + 1}${p.phase === 2 ? ' · all resources held' : ''}`,
+          `acquire resource R${fork + 1}${p.phase === 2 ? ' · all resources held' : ''}`,
           p.phase + 1,
         );
       } else block(`request R${fork + 1} · held by P${(s.forks[fork] ?? 0) + 1}`);

@@ -66,7 +66,7 @@ class Boundary extends Component<
 }
 function position(p: Process, s: Simulation): [number, number, number] {
   const n = s.processes.length;
-  if (s.algorithm === 'philosophers' || s.algorithm === 'deadlock') {
+  if (s.algorithm === 'deadlock') {
     const a = (p.id / n) * Math.PI * 2;
     return [Math.sin(a) * 3.25, 0.65, Math.cos(a) * 3.25];
   }
@@ -137,20 +137,10 @@ function Orb({ p, s }: { p: Process; s: Simulation }) {
         title={`P${p.id + 1}`}
         color={colors[p.state]}
         subtitle={
-          s.algorithm === 'philosophers'
-            ? p.state === 'CRITICAL'
-              ? 'EATING'
-              : p.phase === 0 && p.state === 'READY'
-                ? 'THINKING'
-                : p.state === 'FINISHED'
-                  ? 'FINISHED'
-                  : p.state === 'DEADLOCKED'
-                    ? 'DEADLOCKED'
-                    : 'HUNGRY'
-            : p.state === 'CRITICAL'
-              ? 'IN SECTION'
-              : p.state
-        }
+          p.state === 'CRITICAL'
+            ? 'IN SECTION'
+            : p.state
+          }
       />
     </group>
   );
@@ -215,7 +205,7 @@ function Fork({
   );
 }
 function World({ s }: { s: Simulation }) {
-  const circular = ['philosophers', 'deadlock'].includes(s.algorithm);
+  const circular = s.algorithm === 'deadlock';
   return (
     <>
       <ambientLight intensity={1.3} />
@@ -246,7 +236,7 @@ function World({ s }: { s: Simulation }) {
           <Label
             position={[0, 0.6, 0]}
             width={2.7}
-            title={s.algorithm === 'philosophers' ? 'THE DINING TABLE' : 'RESOURCE GRAPH'}
+            title="RESOURCE GRAPH"
             subtitle={
               s.deadlock
                 ? 'CIRCULAR WAIT'
@@ -260,10 +250,7 @@ function World({ s }: { s: Simulation }) {
             const loc: [number, number, number] = [Math.sin(a) * 1.8, 0.5, Math.cos(a) * 1.8];
             return (
               <group key={i}>
-                {s.algorithm === 'philosophers' ? (
-                  <Fork home={loc} owner={owner} index={i} s={s} />
-                ) : (
-                  <mesh position={loc} rotation={[0, a, 0]}>
+                <mesh position={loc} rotation={[0, a, 0]}>
                     <boxGeometry args={[0.45, 0.45, 0.45]} />
                     <meshStandardMaterial
                       color={owner === null ? '#4ce2ce' : s.deadlock ? '#ff617d' : '#b29aff'}
@@ -271,7 +258,6 @@ function World({ s }: { s: Simulation }) {
                       emissiveIntensity={0.5}
                     />
                   </mesh>
-                )}
                 <Label position={[loc[0], 0.9, loc[2]]} width={0.7} title={`R${i + 1}`} />
                 {s.algorithm === 'deadlock' && owner !== null && (
                   <Arrow from={loc} to={position(s.processes[owner], s)} color="#a28aff" />
