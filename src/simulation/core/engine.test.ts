@@ -94,7 +94,7 @@ describe('discrete-event synchronization invariants', () => {
     expect(s.processes.every((p) => p.state === 'DEADLOCKED')).toBe(true);
     expect(advance(s)).toBe(s);
   });
-  it.each(['deadlock', 'philosophers'] as Algorithm[])(
+  it.each(['deadlock'] as Algorithm[])(
     'avoids circular wait through resource ordering in %s',
     (algorithm) => {
       const s = runToEnd(initial(algorithm, { safe: true }));
@@ -103,8 +103,8 @@ describe('discrete-event synchronization invariants', () => {
       expect(s.forks.every((f) => f === null)).toBe(true);
     },
   );
-  it('naive dining deadlocks; terminating a participant allows remaining work to complete', () => {
-    for (const algorithm of ['philosophers', 'deadlock'] as Algorithm[]) {
+  it('deadlock recovery allows remaining work to complete', () => {
+    for (const algorithm of ['deadlock'] as Algorithm[]) {
       const dead = runToEnd(initial(algorithm));
       expect(dead.deadlock).toBe(true);
       for (const p of dead.processes) {

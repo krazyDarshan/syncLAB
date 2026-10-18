@@ -43,7 +43,6 @@ const icons = {
   counting: Layers,
   buffer: Box,
   readers: Users,
-  philosophers: CircleHelp,
   deadlock: Activity,
 };
 export default function App() {
@@ -301,7 +300,7 @@ export default function App() {
                         <span>
                           {['race', 'mutex', 'binary'].includes(a)
                             ? 'FOUNDATIONS'
-                            : ['deadlock', 'philosophers'].includes(a)
+                            : a === 'deadlock'
                               ? 'RESOURCE SAFETY'
                               : 'COORDINATION'}
                         </span>
@@ -471,7 +470,7 @@ export default function App() {
                       ? 'INVARIANT · Buffer occupancy stays within capacity. Reserved slots/items are deducted from empty/full.'
                       : sim.algorithm === 'readers'
                         ? 'INVARIANT · Writers never overlap with readers or other writers.'
-                        : ['deadlock', 'philosophers'].includes(sim.algorithm)
+                        : sim.algorithm === 'deadlock'
                           ? 'RESOURCE MODEL · Each resource has exactly one instance. Allocation and request cycles are tracked.'
                           : 'INVARIANT · Active processes never exceed available resource capacity.'}
                 </span>

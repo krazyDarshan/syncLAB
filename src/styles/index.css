@@ -519,8 +519,7 @@ main {
   background: #506f9b66;
   border: 1px solid #546e91;
 }
-.module-mutex .module-icon,
-.module-philosophers .module-icon {
+.module-mutex .module-icon {
   color: #361c85;
   background: #e9e7eb66;
   border-color: #6e598d;
@@ -2087,7 +2086,7 @@ p { color:#687c7d; }
 .module-card h3 { color:#314c49; font-size:15px; }
 .module-card p { color:#798981; }
 .module-icon { background:#e8eef7; color:#5c7ea7; border:none; }
-.module-mutex .module-icon,.module-philosophers .module-icon { background:#eee7f4; color:#9477ad; border:none; }
+.module-mutex .module-icon { background:#eee7f4; color:#9477ad; border:none; }
 .module-binary .module-icon,.module-buffer .module-icon { background:#e5efe5; color:#668b6a; border:none; }
 .module-counting .module-icon { background:#f7eedc; color:#ad8747; border:none; }
 .module-deadlock .module-icon { background:#f6e4e4; color:#b66e72; border:none; }

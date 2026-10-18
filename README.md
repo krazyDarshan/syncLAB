@@ -31,7 +31,6 @@ Commit `package-lock.json` with the source; use `npm ci` for reproducible instal
 - **Counting semaphore:** configurable 1–6 permits and 2–8 processes, resource stations, and capacity enforcement.
 - **Producer–consumer:** bounded FIFO conveyor, configurable capacity and relative worker rates, empty/full/mutex values including reservations, and balanced finite workloads even for odd process counts.
 - **Readers–writers:** simultaneous readers, exclusive writers, and reader-preference/writer-preference admission policies.
-- **Dining philosophers:** five philosophers, animated fork acquisition, guaranteed naive circular wait, and resource-ordering prevention.
 - **Deadlock lab:** single-instance allocation/request graph with directed edges, cycle detection, and selected-process termination/recovery.
 - **Presentation:** four guided scenes, Previous/Next navigation, and an automatic Run Demo sequence.
 - **Learning:** theory notes, analogies, pseudocode highlighting, viva questions, limitations, live narration, inspection history, and an architecture overview.

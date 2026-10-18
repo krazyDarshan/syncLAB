@@ -47,7 +47,7 @@ Select a process in the recovery box, click **Terminate & recover**, then Resume
 
 “Recovery sacrifices a process. Prevention is different: resource ordering removes circular wait before it occurs.”
 
-Toggle Resource ordering, run again, and show successful completion. Dining Philosophers provides the same idea with five forks.
+Toggle Resource ordering, run again, and show successful completion. 
 
 ## 4:15 — Architecture and correctness
 
